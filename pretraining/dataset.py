@@ -15,7 +15,7 @@ class SpanCorruptionDataset(Dataset):
     def __getitem__(self, idx):
         text = self.texts[idx]
 
-        # ✅ Keep tokenization here (better for CPU/Windows)
+        
         tokens = self.tokenizer.encode(
             text,
             truncation=True,
@@ -56,7 +56,7 @@ class SpanCorruptionDataset(Dataset):
                 input_ids.append(tokens[i])
                 i += 1
 
-        # ✅ IMPORTANT for T5 training
+        # for T5 training
         labels.append(self.tokenizer.eos_token_id)
 
         return input_ids, labels

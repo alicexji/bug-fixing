@@ -13,7 +13,7 @@ from codebleu import calc_codebleu
 TEST_PATH = "data/processed/test.jsonl"
 TRAIN_PATH = "data/processed/train.jsonl"
 
-# ✅ REQUIRED MODEL
+# REQUIRED MODEL
 MODEL_NAME = "Qwen/Qwen2.5-Coder-1.5B-Instruct"
 
 
@@ -106,7 +106,7 @@ def compute_codebleu(preds, refs):
             refs_wrapped,
             preds,
             lang="java",
-            weights=(0.5, 0.5, 0.0, 0.0)  # avoid tree-sitter issues
+            weights=(0.5, 0.5, 0.0, 0.0) 
         )
         return result
     except Exception:
@@ -154,9 +154,8 @@ def main():
     ).to(device)
 
     print("Loading test data...")
-    #test_data = load_data(TEST_PATH)  # ✅ full test set
-    test_data = load_data(TEST_PATH)[:20]
-    
+    test_data = load_data(TEST_PATH)  # full test set
+
     print("Building retriever...")
     retriever = Retriever(TRAIN_PATH)
 
@@ -170,13 +169,13 @@ def main():
         query = item["input"]
         refs.append(item["output"])
 
-        # 🔵 RAG (3-shot)
+        # RAG (3-shot)
         retrieved = retriever.retrieve(query, k=3)
         rag_prompt = build_prompt(query, retrieved)
         rag_output = generate(model, tokenizer, rag_prompt, device)
         rag_preds.append(rag_output)
 
-        # 🔴 Zero-shot
+        # Zero-shot
         zero_prompt = build_prompt(query, None)
         zero_output = generate(model, tokenizer, zero_prompt, device)
         zero_preds.append(zero_output)

@@ -79,7 +79,7 @@ def compute_codebleu(preds, refs):
             refs_wrapped,
             preds,
             lang="java",
-            weights=(0.5, 0.5, 0.0, 0.0)  # safe version (no tree-sitter)
+            weights=(0.5, 0.5, 0.0, 0.0) 
         )
         return result
 
@@ -119,9 +119,6 @@ def main():
     print("Loading test data...")
     data = load_data()
 
-    # DEBUG MODE — reduce for speed
-    data = data[:100]
-
     print("Generating predictions...")
     preds, refs = generate_predictions(model, tokenizer, data, device)
 
@@ -147,7 +144,7 @@ def main():
         if k != "codebleu":
             print(f"{k}: {v:.4f}")
 
-    # 🔥 SAVE OUTPUTS
+    # SAVE OUTPUTS
     os.makedirs("outputs", exist_ok=True)
 
     tag = get_output_name(MODEL_PATH)

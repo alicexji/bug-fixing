@@ -19,7 +19,7 @@ def main():
 
         character_coverage=1.0,
 
-        # ✅ CLEAN SPECIAL TOKENS (important)
+        # CLEAN SPECIAL TOKENS
         pad_id=0,
         unk_id=1,
         bos_id=2,
@@ -30,14 +30,10 @@ def main():
         bos_piece="<s>",
         eos_piece="</s>",
 
-        # ✅ REQUIRED for T5 span corruption
+        #for T5 span corruption
         user_defined_symbols=[f"<extra_id_{i}>" for i in range(100)],
 
-        # 🚨 FIX: REMOVE problematic settings
-        # split_by_whitespace=False  ❌ REMOVE
-        # byte_fallback=True        ❌ REMOVE
-
-        # Optional but safer:
+   
         normalization_rule_name="identity"
     )
 

@@ -26,7 +26,7 @@ def main():
         num_layers=6,
         num_decoder_layers=6,
 
-        # IMPORTANT: match tokenizer
+        # match tokenizer
         pad_token_id=tokenizer.pad_token_id,
         eos_token_id=tokenizer.eos_token_id,
         decoder_start_token_id=tokenizer.pad_token_id

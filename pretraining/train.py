@@ -30,7 +30,7 @@ def load_data():
 
     texts = [t.strip() for t in texts if t.strip()]
 
-    # enforce ~50K requirement
+    # ~50K requirement
     texts = texts[:50000]
 
     print(f"Loaded {len(texts)} samples")
